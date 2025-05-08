@@ -1,0 +1,27 @@
+{
+  "name": "rpg-backend",
+  "version": "1.0.0",
+  "description": "Backend RPG usando Node.js, TypeScript, TypeORM e DDD",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typeorm": "typeorm-ts-node-commonjs"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "class-validator": "^0.14.0",
+    "express": "^4.18.2",
+    "pg": "^8.11.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.17",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.6"
+  }
+}
