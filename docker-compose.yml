@@ -5,7 +5,7 @@ services:
     container_name: rpg-api
     build: .
     ports:
-      - '3000:3000'
+      - '3007:3000' # Porta externa 3001 → interna 3000 (API)
     depends_on:
       - db
     environment:
@@ -27,7 +27,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: rpg
     ports:
-      - '5432:5432'
+      - '5437:5432' # Porta externa 5433 → interna 5432 (Postgres)
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
