@@ -1,5 +1,3 @@
-// src/domain/player/Player.ts
-
 export class Player {
   constructor(
     public readonly id: string,
