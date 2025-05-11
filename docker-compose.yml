@@ -1,22 +1,20 @@
-version: '3.8'
-
 services:
   api:
     container_name: rpg-api
     build: .
     ports:
-      - '3007:3000'
+      - "3007:3000"
     depends_on:
       - db
     environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=rpg
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: rpg
+    command: pnpm dev
     volumes:
       - .:/app
-    command: pnpm run dev
 
   db:
     container_name: rpg-db
@@ -27,7 +25,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: rpg
     ports:
-      - '5437:5432'
+      - "5437:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

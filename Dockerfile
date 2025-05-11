@@ -1,26 +1,22 @@
-# Usa imagem oficial do Node.js
-FROM node:20-alpine
+FROM node:20
 
-# Instala pnpm globalmente no container
+# Instala pnpm globalmente
 RUN npm install -g pnpm
 
-# Define diretório de trabalho dentro do container
+# Define diretório de trabalho
 WORKDIR /app
 
-# Copia package.json, pnpm-lock.yaml e .npmrc (se existir)
+# Copia arquivos de dependências
 COPY package.json pnpm-lock.yaml ./
 
-# Instala dependências com pnpm
-RUN pnpm install
+# Instala todas as dependências (inclusive dev)
+RUN pnpm install --frozen-lockfile
 
-# Copia o restante do código
+# Copia o restante da aplicação
 COPY . .
 
-# Compila o TypeScript para JS
-RUN pnpm run build
-
-# Expõe a porta que a API usará
+# Expõe a porta da API
 EXPOSE 3000
 
-# Comando padrão ao subir o container
-CMD ["pnpm", "start"]
+# Comando padrão
+CMD ["pnpm", "dev"]
