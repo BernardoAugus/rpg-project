@@ -16,6 +16,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["src"],
+  "include": ["src", "src/infrastructure/db/data-source.ts"],
   "exclude": ["node_modules", "dist"]
 }

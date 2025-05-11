@@ -1,33 +1,36 @@
-services:
-  api:
-    container_name: rpg-api
-    build: .
-    ports:
-      - "3007:3000"
-    depends_on:
-      - db
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: rpg
-    command: pnpm dev
-    volumes:
-      - .:/app
+version: '3.8'
 
-  db:
-    container_name: rpg-db
-    image: postgres:15-alpine
-    restart: always
+services:
+  postgres:
+    container_name: rpg-postgres
+    image: postgres:14
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: rpg
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: postgres
     ports:
-      - "5437:5432"
+      - "5435:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  api:
+    container_name: rpg-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3000"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: 12345
+      DB_NAME: postgres
+    depends_on:
+      - postgres
+    command: pnpm dev
+    restart: unless-stopped
 
 volumes:
-  postgres_data:
+  pgdata:

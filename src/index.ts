@@ -1,6 +1,5 @@
 import 'reflect-metadata';
 import express from 'express';
-import { DataSource } from 'typeorm';
 import { AppDataSource } from './infrastructure/db/data-source';
 
 const app = express();
@@ -11,7 +10,6 @@ app.use(express.json());
 AppDataSource.initialize()
   .then(() => {
     console.log('📦 Banco de dados conectado');
-
     app.listen(port, () => {
       console.log(`🚀 Servidor rodando em http://localhost:${port}`);
     });

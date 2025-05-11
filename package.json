@@ -4,12 +4,19 @@
   "description": "Backend RPG usando Node.js, TypeScript, TypeORM e DDD",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "nodemon",
+    "start": "ts-node src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
-    "typeorm": "typeorm-ts-node-commonjs",
-    "migrate:generate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate src/infrastructure/db/migrations/AutoMigration -d src/infrastructure/db/data-source.ts",
-    "migrate:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d src/infrastructure/db/data-source.ts"
+    "lint": "eslint . --ext .ts",
+    "test": "echo \"No test configured yet\" && exit 0",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/database/migrations/default",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
+    "migration:revert": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:revert",
+    "migration:show": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:show",
+    "seed:all": "ts-node src/database/seeds/run-all-seeds.ts",
+    "db:setup": "pnpm migration:run && pnpm seed:all",
+    "revert:all": "ts-node src/database/revert-all-migrations.ts",
+    "db:reset": "pnpm revert:all && pnpm migration:run && pnpm seed:all"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -28,6 +35,7 @@
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "yn": "^5.0.0"
   }
 }
