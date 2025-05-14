@@ -9,6 +9,6 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: false,
   logging: true,
-  entities: [__dirname + '/../**/*.entity.{ts,js}'],
-  migrations: [__dirname + '/../**/migrations/*.{ts,js}'],
+  entities: [__dirname + '/../entities/*.ts'], // ou apenas a pasta específica se preferir
+  migrations: [__dirname + '/../migrations/*.ts'],
 });
